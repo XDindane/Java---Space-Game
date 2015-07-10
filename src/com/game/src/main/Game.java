@@ -1,6 +1,5 @@
 package com.game.src.main;
 
-
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -35,7 +34,6 @@ public class Game extends Canvas implements Runnable {
     private BufferedImage spriteSheet = null;
     private BufferedImage background = null;
 
-    
     private boolean is_shooting = false;
     private Player p;
     private Controller c;
@@ -52,10 +50,10 @@ public class Game extends Canvas implements Runnable {
         }
 
         addKeyListener(new KeyInput(this));
-        
+
         // need before player and controller
         tex = new Textures(this);
-        
+
         p = new Player(200, 200, tex);
         c = new Controller(this, tex);
     }
@@ -137,13 +135,13 @@ public class Game extends Canvas implements Runnable {
             return;
         }
         Graphics g = bs.getDrawGraphics();
-         ////////////////////////////////
+        ////////////////////////////////
         //////// drawing stuff ////////
 
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
-        
+
         g.drawImage(background, 0, 0, null);
-        
+
         p.render(g);
         c.render(g);
         ////////////////////////////////
