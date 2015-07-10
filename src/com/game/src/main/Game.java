@@ -1,6 +1,6 @@
 package com.game.src.main;
 
-import com.sun.imageio.plugins.png.PNGMetadata;
+
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -8,13 +8,12 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.nio.Buffer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 /**
- * TODO # tutorial #11;
+ * TODO # tutorial #12;
  *
  * @author Denis Mahmúd
  */
@@ -34,23 +33,31 @@ public class Game extends Canvas implements Runnable {
 
     private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
     private BufferedImage spriteSheet = null;
+    private BufferedImage background = null;
 
+    
+    private boolean is_shooting = false;
     private Player p;
     private Controller c;
+    private Textures tex;
 
     public void init() {
         requestFocus();
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("/nyan_ship.png");
+            background = loader.loadImage("/background.png");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
         addKeyListener(new KeyInput(this));
-
-        p = new Player(200, 200, this);
-        c = new Controller(this);
+        
+        // need before player and controller
+        tex = new Textures(this);
+        
+        p = new Player(200, 200, tex);
+        c = new Controller(this, tex);
     }
 
     ;
@@ -134,6 +141,9 @@ public class Game extends Canvas implements Runnable {
         //////// drawing stuff ////////
 
         g.drawImage(image, 0, 0, getWidth(), getHeight(), this);
+        
+        g.drawImage(background, 0, 0, null);
+        
         p.render(g);
         c.render(g);
         ////////////////////////////////
@@ -174,8 +184,9 @@ public class Game extends Canvas implements Runnable {
             p.setVelY(5);
         } else if (key == KeyEvent.VK_UP) {
             p.setVelY(- 5);
-        } else if (key == KeyEvent.VK_SPACE) {
-            c.addBullet(new Bullet(p.getX(), p.getY(), this));
+        } else if (key == KeyEvent.VK_SPACE && !is_shooting) {
+            is_shooting = true;
+            c.addBullet(new Bullet(p.getX(), p.getY(), tex));
         }
 
     }
@@ -192,6 +203,8 @@ public class Game extends Canvas implements Runnable {
             p.setVelY(0);
         } else if (key == KeyEvent.VK_UP) {
             p.setVelY(0);
+        } else if (key == KeyEvent.VK_SPACE) {
+            is_shooting = false;
         }
 
     }
