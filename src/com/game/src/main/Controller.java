@@ -18,18 +18,19 @@ public class Controller {
 
     EntityA enta;
     EntityB entb;
-    
-    private Textures tex;
 
+    private Textures tex;
+    private Game game;
     Random r = new Random();
 
-    public Controller(Textures tex) {
+    public Controller(Textures tex, Game game) {
         this.tex = tex;
+        this.game = game;
     }
-    
+
     public void createEnemy(int enemy_count) {
         for (int i = 0; i < enemy_count; i++) {
-            addEntity(new Enemy(r.nextInt(640), -10, tex));
+            addEntity(new Enemy(r.nextInt(640), -10, tex, this, game));
         }
     }
 
@@ -53,7 +54,7 @@ public class Controller {
             enta = ea.get(i);
             enta.render(g);
         }
-        
+
         // B class
         for (int i = 0; i < eb.size(); i++) {
             entb = eb.get(i);
@@ -65,14 +66,15 @@ public class Controller {
         ea.add(block);
     }
 
-    public void addRemove(EntityA block) {
+    public void removeEntity(EntityA block) {
         ea.remove(block);
     }
+
     public void addEntity(EntityB block) {
         eb.add(block);
     }
 
-    public void addRemove(EntityB block) {
+    public void removeEntity(EntityB block) {
         eb.remove(block);
     }
 
@@ -84,7 +86,4 @@ public class Controller {
         return eb;
     }
 
- 
-
-    
 }
