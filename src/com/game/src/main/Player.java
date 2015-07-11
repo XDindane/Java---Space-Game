@@ -6,14 +6,13 @@
 
 package com.game.src.main;
 
+import com.games.src.main.classes.EntityA;
 import java.awt.Graphics;
-import java.awt.image.BufferedImage;
+import java.awt.Rectangle;
 
 
-public class Player {
-    
-    private double x; // x-coords
-    private double y; // y-coords
+public class Player  extends GameObject implements EntityA{
+
     
     private double velX = 0;
     private double velY = 0;
@@ -21,9 +20,7 @@ public class Player {
     private Textures tex;
     
     public Player (double x, double y, Textures tex) {
-        
-        this.x = x;
-        this.y = y;
+        super(x,y);
         this.tex = tex;
 
     }
@@ -53,6 +50,10 @@ public class Player {
         g.drawImage(tex.player, (int) x, (int) y, null);
         
     }
+    
+       public Rectangle getBounds() {
+       return new Rectangle((int)x, (int)y, 32, 32);
+   }
 
     
     public double getX() {

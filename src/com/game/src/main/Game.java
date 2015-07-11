@@ -1,5 +1,7 @@
 package com.game.src.main;
 
+import com.games.src.main.classes.EntityA;
+import com.games.src.main.classes.EntityB;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -7,6 +9,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -39,6 +42,13 @@ public class Game extends Canvas implements Runnable {
     private Controller c;
     private Textures tex;
 
+    public LinkedList<EntityA> ea;
+    public LinkedList<EntityB> eb;
+    
+    private int enemy_count = 5; // how many spawn
+    private int enemy_killed = 0; // how many killed
+    
+    
     public void init() {
         requestFocus();
         BufferedImageLoader loader = new BufferedImageLoader();
@@ -53,9 +63,12 @@ public class Game extends Canvas implements Runnable {
 
         // need before player and controller
         tex = new Textures(this);
-
-        p = new Player(200, 200, tex);
-        c = new Controller(this, tex);
+        p = new Player(300, 400, tex);
+        c = new Controller(tex);
+        
+        ea = c.getEntityA();
+        eb = c.getEntityB();
+        c.createEnemy(enemy_count);
     }
 
     ;
@@ -184,7 +197,7 @@ public class Game extends Canvas implements Runnable {
             p.setVelY(- 5);
         } else if (key == KeyEvent.VK_SPACE && !is_shooting) {
             is_shooting = true;
-            c.addBullet(new Bullet(p.getX(), p.getY(), tex));
+            c.addEntity(new Bullet(p.getX(), p.getY(), tex, this));
         }
 
     }
@@ -207,4 +220,22 @@ public class Game extends Canvas implements Runnable {
 
     }
 
+    public int getEnemy_count() {
+        return enemy_count;
+    }
+
+    public void setEnemy_count(int enemy_count) {
+        this.enemy_count = enemy_count;
+    }
+
+    public int getEnemy_killed() {
+        return enemy_killed;
+    }
+
+    public void setEnemy_killed(int enemy_killed) {
+        this.enemy_killed = enemy_killed;
+    }
+
+    
+    
 }
