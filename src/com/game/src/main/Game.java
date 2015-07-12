@@ -5,12 +5,14 @@ import com.games.src.main.classes.EntityB;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
@@ -46,13 +48,16 @@ public class Game extends Canvas implements Runnable {
     public LinkedList<EntityA> ea;
     public LinkedList<EntityB> eb;
 
-    public static int HEALTH = 100 * 2;
+    public static int HEALTH = 100;
 
     private int enemy_count = 5; // how many spawn
     private int enemy_killed = 0; // how many killed
     private int highscore = 0;
+    private int score = 0;
 
+    Random r = new Random();
     public static enum STATE {
+
         MENU,
         GAME
     };
@@ -61,11 +66,11 @@ public class Game extends Canvas implements Runnable {
 
     public void init() {
         requestFocus();
-        
+
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
             spriteSheet = loader.loadImage("/nyan_ship.png");
-            background = loader.loadImage("/background.png");
+            background = loader.loadImage("/background_" + (r.nextInt(6) + 1) +".png");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -188,6 +193,10 @@ public class Game extends Canvas implements Runnable {
             g.setColor(Color.white);
             g.drawRect(5, 5, 200, 50);
 
+            Font fnt1 = new Font("arial", Font.BOLD, 25);
+            g.setFont(fnt1);
+            g.drawString("Score: " + this.getScore(), 500, 30);
+
         } else if (State == STATE.MENU) {
             menu.render(g);
 
@@ -279,6 +288,14 @@ public class Game extends Canvas implements Runnable {
 
     public void setHighscore(int highscore) {
         this.highscore = highscore;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 
 }

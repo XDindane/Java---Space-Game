@@ -8,10 +8,7 @@ package com.game.src.main;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-/**
- *
- * @author denis
- */
+
 public class MouseInput implements MouseListener {
 
     Game game;
@@ -43,7 +40,7 @@ public class MouseInput implements MouseListener {
 
             if (my >= 150 && my <= 200) {
                 // Pressed Play Button
-                game.setHighscore(0);
+                game.setScore(0);
                 game.setEnemy_count(5);
                 game.setEnemy_killed(0);
                 Game.State = Game.STATE.GAME;
@@ -53,7 +50,7 @@ public class MouseInput implements MouseListener {
         // quitButton
         if (mx >= Game.WIDTH / 2 + 120 && mx <= Game.WIDTH / 2 + 220) {
 
-            if (my >= 350 && my <= 400) {
+            if (my >= 250 && my <= 300) {
                 // Pressed quit Button
                 System.exit(1);
             }
