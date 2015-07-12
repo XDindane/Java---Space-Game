@@ -163,7 +163,7 @@ public class Game extends Canvas implements Runnable {
         }
 
         if (HEALTH <= 0) {
-            HEALTH = 100 * 2;
+            HEALTH = 100;
             Game.State = Game.STATE.MENU;
         }
     }
@@ -187,11 +187,11 @@ public class Game extends Canvas implements Runnable {
             c.render(g);
 
             g.setColor(Color.gray);
-            g.fillRect(5, 5, 200, 50);
+            g.fillRect(5, 5, 100, 50);
             g.setColor(Color.green);
             g.fillRect(5, 5, HEALTH, 50);
             g.setColor(Color.white);
-            g.drawRect(5, 5, 200, 50);
+            g.drawRect(5, 5, 100, 50);
 
             Font fnt1 = new Font("arial", Font.BOLD, 25);
             g.setFont(fnt1);
