@@ -5,8 +5,8 @@
  */
 package com.game.src.main;
 
-import com.games.src.main.classes.EntityA;
-import com.games.src.main.classes.EntityB;
+import com.game.src.main.classes.EntityA;
+import com.game.src.main.classes.EntityB;
 import java.util.LinkedList;
 
 public class Physics {

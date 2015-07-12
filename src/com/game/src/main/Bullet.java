@@ -6,7 +6,7 @@
 package com.game.src.main;
 
 import com.game.src.libs.Animation;
-import com.games.src.main.classes.EntityA;
+import com.game.src.main.classes.EntityA;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 

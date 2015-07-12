@@ -1,7 +1,7 @@
 package com.game.src.main;
 
-import com.games.src.main.classes.EntityA;
-import com.games.src.main.classes.EntityB;
+import com.game.src.main.classes.EntityA;
+import com.game.src.main.classes.EntityB;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Dimension;
