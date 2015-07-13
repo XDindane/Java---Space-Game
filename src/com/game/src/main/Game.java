@@ -69,8 +69,8 @@ public class Game extends Canvas implements Runnable {
 
         BufferedImageLoader loader = new BufferedImageLoader();
         try {
-            spriteSheet = loader.loadImage("/nyan_ship.png");
-            background = loader.loadImage("/background_" + (r.nextInt(6) + 1) +".png");
+            spriteSheet = loader.loadImage("res/nyan_ship.png");
+            background = loader.loadImage("res/background_" + (r.nextInt(6) + 1) +".png");
         } catch (IOException e) {
             e.printStackTrace();
         }
